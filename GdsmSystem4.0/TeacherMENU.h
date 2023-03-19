@@ -2,10 +2,16 @@
 #include"Function.h"
 #include<easyx.h>
 #include"Print.h"
+#include"DBConnection.h"
 class TeacherMENU
 {
 public:
-	int Teachermenu();
+	int Teachermenu(char* UserNameid , DBConnection& dbConnection);
+	//int Teachermenu();
 	int Teachermenu_Mainmenu();
+private:
+	void Teachermenu_Personal(char* UserNameid, DBConnection& dbConnection);
+	void Teachermenu_Grade();
+	void Teachermenu_Print();
 };
 

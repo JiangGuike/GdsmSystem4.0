@@ -11,6 +11,7 @@ class MENUchoose
 public:
 	int StartMENU_MENUchoose();
 	int StartMENU_Login_MENUChoose();
+	int Teachermenu_MENUchoose();
 	//MENUchoose();
 	//~MENUchoose();
 

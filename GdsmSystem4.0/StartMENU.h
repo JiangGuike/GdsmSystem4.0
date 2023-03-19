@@ -1,20 +1,20 @@
 #pragma once
 #ifndef StartMENU_H
 #define StartMENU_H
+#include"DBConnection.h"
 #include <easyx.h>
 #include<graphics.h>
 #include"Struct.h"
-#include"Struct.h"
 #include "Function.h"
 #include <windows.h>
-
+#include <vector>
 class StartMENU
 {
 public:
-	int start();
-	int teacher_start();
-	int student_start();
-	int administrator_start();
+	Point start(DBConnection& dbConnection);
+	Point teacher_start(DBConnection& dbConnection);
+	Point student_start(DBConnection& dbConnection);
+	Point administrator_start(DBConnection& dbConnection);
 	//StartMENU();
 	//~StartMENU();
 

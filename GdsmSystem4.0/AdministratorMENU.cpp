@@ -1,8 +1,8 @@
 #include "AdministratorMENU.h"
 
-int AdministratorMENU::Administratormenu()
+int AdministratorMENU::Administratormenu(string UserName)
 {
-	initgraph(1280, 720, EW_NOCLOSE);	// 创建绘图窗口，大小为 1280x720 像素
+	initgraph(1280, 720, NOCLOSE);	// 创建绘图窗口，大小为 1280x720 像素
 	// 设置背景色为淡白色
 	setbkcolor(RGB(255, 255, 253));
 	setbkmode(TRANSPARENT);
@@ -19,7 +19,7 @@ int AdministratorMENU::Administratormenu()
 	Print Loading;
 	Loading.TE_PrintLoading();
 	IMAGE BG;
-	loadimage(&BG, _T(".\\IMAGES\\Ad_MainMenu.png"), 1280, 720);
+	loadimage(&BG, _T(".\\IMAGES\\MainMenu.png"), 1280, 720);
 	putimage(0, 0, &BG);	// 显示背景
 	int MENUchoice;
 	MENUchoice = Administratormenu_Mainmenu();

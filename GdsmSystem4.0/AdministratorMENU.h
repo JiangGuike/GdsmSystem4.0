@@ -5,7 +5,7 @@
 class AdministratorMENU
 {
 public:
-	int Administratormenu();
+	int Administratormenu(string UserName);
 	int Administratormenu_Mainmenu();
 };
 

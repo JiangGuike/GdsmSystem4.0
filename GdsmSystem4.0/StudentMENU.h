@@ -5,7 +5,7 @@
 class StudentMENU
 {
 public:
-	int Studentmenu();
+	int Studentmenu(string UserName);
 	int Studentmenu_Mainmenu();
 };
 
