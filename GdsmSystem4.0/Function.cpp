@@ -61,11 +61,12 @@ int Function::CR_InputBox(char* Input, int Limit, int x, int y, int Lsize, int H
 			{
 				if (Length != 0)
 				{
-					InputBuf[Length] = '\0';
+					InputBuf[Length-1] = '\0';
 					Length--;
 					clearrectangle(x + 10 + 14 * Length, y, x + 24 + 14 * Length, y + 34);
 					setlinecolor(BLACK);
 					line(x + 8 + Length * 14, y + 42, x + 22 + Length * 14, y + 42);
+					
 				}
 			}
 		}
@@ -146,7 +147,7 @@ int Function::CHR_InputBox(char* Input, int Limit, int x, int y, int Lsize, int 
 			{
 				if (Length != 0)
 				{
-					InputBuf[Length] = '\0';
+					InputBuf[Length-1] = '\0';
 					Length--;
 					clearrectangle(x + Length * (Hsize / 2)+5, y, x + (Length + 1) * (Hsize / 2)+5, y + Hsize);
 					setlinecolor(BLACK);
@@ -267,5 +268,45 @@ void Function::transparentimage5(IMAGE* dstimg, int x, int y, IMAGE* srcimg)
 		dst += dst_width;
 		src += src_width;
 	}
+}
+
+std::string Function::Change_password(char* UserNameid, DBConnection& dbConnection,int left,int top,int right,int bottom)
+{
+	setcolor(RGB(0, 0, 0));
+	settextstyle(24, 0, "SimHei");
+	std::string newword = "输入新密码：";
+	outtextxy(565, 506, newword.c_str());
+	std::string Confirmnewword = "确认新密码：";
+	outtextxy(565, 571, Confirmnewword.c_str());
+	char newpassword[50] ;
+	char password[50] ;
+	char Confirmnewpassword[50] ;
+	Function input;
+	std::string oldpassword = dbConnection.findData(UserNameid, "teacher_table", "tea_id", "tea_pwd");
+	input.CR_InputBox(newpassword, 16, 700, 490, 252, 30, "请输入新密码");
+	if (std::string(newpassword).empty()) 
+	{
+		HWND wnd = GetHWnd();
+		MessageBox(wnd, "未输入密码！", "警告", MB_OK | MB_ICONWARNING);
+		return "";
+		// 未输入
+	}
+	else if (strcmp(oldpassword.c_str(), newpassword) == 0)
+	{
+		HWND wnd = GetHWnd();
+		MessageBox(wnd, "不能使用旧密码！", "警告", MB_OK | MB_ICONWARNING);
+		return "";
+		// 未输入
+	}
+	input.CR_InputBox(Confirmnewpassword, 16, 700, 555, 252, 30, "请确认新密码");
+	if (strcmp(Confirmnewpassword, newpassword) != 0)
+	{
+		HWND wnd = GetHWnd();
+		MessageBox(wnd, "两次输入的密码不一致！", "警告", MB_OK | MB_ICONWARNING);
+		return "";
+
+	}
+	strcpy_s(password, newpassword);
+	return password;
 }
 

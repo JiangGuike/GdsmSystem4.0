@@ -3,6 +3,7 @@
 #include"Struct.h"
 #include<easyx.h>
 #include<conio.h>
+#include"DBConnection.h"
 #pragma comment( lib, "MSIMG32.LIB")
 class Function
 {
@@ -58,5 +59,6 @@ public:
 	//	5. 根据 png 的 alpha 信息实现半透明贴图（基于直接操作显示缓冲区）				可以实现 256 级透明度，自由度高，可以补充代码实现更多功能。			0.0311
 
 	//具体讲解代码：https://codebus.cn/yangw/transparent-putimage
+	std::string Change_password(char* UserNameid, DBConnection& dbConnection,int left, int top, int right, int bottom);
 };
 

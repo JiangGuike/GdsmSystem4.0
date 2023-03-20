@@ -4,7 +4,7 @@
 
 Point StartMENU::start(DBConnection& dbConnection)
 {
-	initgraph(1024, 576, NOCLOSE);    // 创建绘图窗口，大小为 1280x720 像素
+	initgraph(1024, 576);    // 创建绘图窗口，大小为 1280x720 像素
 	cleardevice();
 	setbkcolor(RGB(244, 244, 244));
 	// 设置背景色为淡白色
@@ -19,15 +19,7 @@ Point StartMENU::start(DBConnection& dbConnection)
 	settextstyle(&format);
 	Point p;
 	IMAGE BG;
-	IMAGE TeacherBox;
-	IMAGE StudentBox;
-	IMAGE AdministratorBox;
-
-	loadimage(&BG, _T("..\\IMAGES\\Ad_MainMenu.png"), 1280, 720);
 	loadimage(&BG, _T(".\\IMAGES\\StartMenu.png"), 1024, 576);
-	loadimage(&TeacherBox, _T(".\\IMAGES\\TeacherBox.png"), 301, 51);
-	loadimage(&StudentBox, _T(".\\IMAGES\\StudentBox.png"), 301, 51);
-	loadimage(&AdministratorBox, _T(".\\IMAGES\\AdministratorBox.png"), 301, 51);
 	putimage(0, 0, &BG);
 
 
@@ -48,6 +40,24 @@ Point StartMENU::start(DBConnection& dbConnection)
 
 	//DBConnection::~DBConnection()
 	//以上都是常规代码
+	p=startmenu(dbConnection);
+	return p;
+	closegraph();			// 关闭绘图窗口
+
+ }
+
+Point StartMENU::startmenu(DBConnection& dbConnection)
+{
+	IMAGE BG;
+	Point p;
+	IMAGE TeacherBox;
+	IMAGE StudentBox;
+	IMAGE AdministratorBox;
+	loadimage(&BG, _T(".\\IMAGES\\StartMenu.png"), 1024, 576);
+	loadimage(&TeacherBox, _T(".\\IMAGES\\TeacherBox.png"), 301, 51);
+	loadimage(&StudentBox, _T(".\\IMAGES\\StudentBox.png"), 301, 51);
+	loadimage(&AdministratorBox, _T(".\\IMAGES\\AdministratorBox.png"), 301, 51);
+	putimage(0, 0, &BG);
 	MENUchoose choose;
 	int MENUchoice;
 	MENUchoice = choose.StartMENU_MENUchoose();
@@ -56,36 +66,37 @@ Point StartMENU::start(DBConnection& dbConnection)
 		switch (MENUchoice)
 		{
 		case 1:
-			{
+		{
 			putimage(361, 223, &TeacherBox);
 			Sleep(50); // 延时0.05秒
 			p = teacher_start(dbConnection);
 			return p;
-			}
+			break;
+		}
 		case 2:
-			{
+		{
 			putimage(361, 301, &StudentBox);
 			Sleep(50); // 延时0.05秒
 			p = student_start(dbConnection);
 			return p;
-			}
+			break;
+		}
 		case 3:
-			{
+		{
 			putimage(361, 378, &AdministratorBox);
 			Sleep(50); // 延时0.05秒
 			p = administrator_start(dbConnection);
 			return p;
-			}	
+			break;
+		}
 		}
 	}
-	//return 1;
-
- }
+}
 
 Point StartMENU::teacher_start(DBConnection& dbConnection)
 {
 	Point p;
-	cleardevice();
+	//cleardevice();
 	IMAGE TeacherMENU;
 	IMAGE UserNameBox;
 	IMAGE PassWordBox;
@@ -132,7 +143,6 @@ Point StartMENU::teacher_start(DBConnection& dbConnection)
 		case 3:
 			{
 			std::string found = dbConnection.findData(UserNameID, "teacher_table", "tea_id", "tea_pwd");
-			std::string found2 = dbConnection.findData(UserNameID, "teacher_table", "tea_id", "CONVERT(tea_name USING utf8)");
 			if (found.empty()) {
 				putimage(361, 223, &UserNameWrong);
 				putimage(361, 301, &PassWordWrong);
@@ -155,9 +165,10 @@ Point StartMENU::teacher_start(DBConnection& dbConnection)
 			}
 		case 4:
 			{
+			fflush(stdin);//先清空输入缓存
 			putimage(495, 452, &CancelBox);
 			Sleep(50); // 延时0.05秒
-			start(dbConnection);
+			startmenu(dbConnection);
 			MENUchoice_Login = choose.StartMENU_Login_MENUChoose();
 			break;
 			}
@@ -170,7 +181,7 @@ Point StartMENU::teacher_start(DBConnection& dbConnection)
 Point StartMENU::student_start(DBConnection& dbConnection)
 {
 	Point p;
-	cleardevice();
+	//cleardevice();
 	IMAGE StudentMENU;
 	IMAGE UserNameBox;
 	IMAGE PassWordBox;
@@ -239,9 +250,10 @@ Point StartMENU::student_start(DBConnection& dbConnection)
 		}
 		case 4:
 		{
+			fflush(stdin);//先清空输入缓存
 			putimage(495, 452, &CancelBox);
 			Sleep(50); // 延时0.05秒
-			start(dbConnection);
+			startmenu(dbConnection);
 			MENUchoice_Login = choose.StartMENU_Login_MENUChoose();
 			break;
 		}
@@ -252,7 +264,7 @@ Point StartMENU::student_start(DBConnection& dbConnection)
 Point StartMENU::administrator_start(DBConnection& dbConnection)
 {
 	Point p;
-	cleardevice();
+	//cleardevice();
 	IMAGE AdministratorMENU;
 	IMAGE UserNameBox;
 	IMAGE PassWordBox;
@@ -321,9 +333,10 @@ Point StartMENU::administrator_start(DBConnection& dbConnection)
 		}
 		case 4:
 			{
+				fflush(stdin);//先清空输入缓存
 				putimage(495, 452, &CancelBox);
 				Sleep(50); // 延时0.05秒
-				start(dbConnection);
+				startmenu(dbConnection);
 				MENUchoice_Login = choose.StartMENU_Login_MENUChoose();
 				break;
 			}

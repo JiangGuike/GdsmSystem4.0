@@ -62,14 +62,14 @@
     <ClInclude Include="Struct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="StudentMENU.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="TeacherMENU.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="DBConnection.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentMENU.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

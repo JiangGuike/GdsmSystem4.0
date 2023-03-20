@@ -12,6 +12,7 @@ class StartMENU
 {
 public:
 	Point start(DBConnection& dbConnection);
+	Point startmenu(DBConnection& dbConnection);
 	Point teacher_start(DBConnection& dbConnection);
 	Point student_start(DBConnection& dbConnection);
 	Point administrator_start(DBConnection& dbConnection);

@@ -12,8 +12,11 @@ public:
 	int StartMENU_MENUchoose();
 	int StartMENU_Login_MENUChoose();
 	int Teachermenu_MENUchoose();
+	int Teachermenu_Personal_MENUchoose();
+	int Teachermenu_Grade_MENUchoose();
+	int Teachermenu_Print_MENUchoose();
 	//MENUchoose();
-	//~MENUchoose();
+	//~MENUchoose();Grade
 
 private:
 
